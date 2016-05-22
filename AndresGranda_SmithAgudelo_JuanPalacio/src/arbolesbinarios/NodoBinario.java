@@ -79,6 +79,20 @@ public class NodoBinario<E> {
         return resultado;
     }
 
+    public List<E> inordem() {
+        List<E> list = new LinkedList<>();
+        inordem( this, list );
+        return list;
+    }
+    
+    protected void inordem(NodoBinario<E> node, List<E> list) {
+        if ( node != null) {
+            inordem(node.hijoIzquierdo, list);
+            list.add( node.getItem());
+            inordem(node.hijoDerecho, list);
+        } 
+    }
+    
     public List<E> preorder() {
         List<E> list = new LinkedList<>();
         preorder(this, list);
@@ -89,7 +103,6 @@ public class NodoBinario<E> {
         if (nodo != null) {
             list.add( nodo.getItem() );
             preorder( nodo.hijoIzquierdo, list);
-            list.add( nodo.getItem() );
             preorder(nodo.hijoDerecho, list);
         }
     }

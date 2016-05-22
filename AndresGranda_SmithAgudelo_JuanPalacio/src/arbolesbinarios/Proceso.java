@@ -51,7 +51,7 @@ public class Proceso {
     public List<String> ordenarTexto() {
         List<String> list = new LinkedList<>();
         NodoBinario<String> raiz = arbol.getRaiz();
-        list = raiz.preorder();
+        list = raiz.inordem();
         return list;
     }
     

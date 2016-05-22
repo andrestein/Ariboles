@@ -24,6 +24,7 @@ public class Inicial {
 
     public static void main( String args[] ) {
         Proceso proceso = new Proceso( "Texto" );
+        
         for ( ;; ) {
             println( "### Arboles" );
             Scanner read = new Scanner( System.in );
@@ -51,7 +52,7 @@ public class Inicial {
             } while ( op == '\0' );
             println( "\nArbol creado exitosamente." );
             do {
-                println( "\n\n### Operaciones" );
+                println( "\n### Operaciones" );
                 println( "a) Muestra cuantas palabras lo componen.\n"
                         + "b) Muestra las palabras diferentes que lo componen\n"
                         + "   y las veces que se repite cada palabra.\n"
@@ -91,7 +92,8 @@ public class Inicial {
                     default: 
                         op = '\0';
                 }
-                
+                println( "\nEnter para continuar..." );
+                read.nextLine();
             } while ( op != '\0' );
         }
     }
