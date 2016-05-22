@@ -5,7 +5,7 @@
  */
 package arbolesbinarios;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,14 +21,12 @@ public class Proceso {
         arbol = new ABB();
     }
     
-    public void crearArbol(){
-        String palabra = "";
-        for(int i = 0;i<texto.length();i++){
-            if(texto.charAt(i) != ' '){
-                palabra = palabra+texto.charAt(i);
-            }else{
-                arbol.add(palabra);
-                palabra="";
+    public void crearArbol(List<String> palabras){
+        for(String palabra: palabras) {
+            palabra = palabra.trim();
+            if ( palabra.matches( "\\w+") ) {
+                System.out.print( palabra + "," );
+                arbol.add( palabra );
             }
         }
     }
