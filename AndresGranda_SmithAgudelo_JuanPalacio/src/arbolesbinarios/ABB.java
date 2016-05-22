@@ -71,6 +71,20 @@ public class ABB<E extends Comparable<E>> {
 
         return 0;
     }
+    
+    public int cantidadDePalabras() {
+        return cantidadDePalabras(raiz);
+    }
+
+    public int cantidadDePalabras(NodoBinario<E> r) {
+        if (r != null) {
+            return cantidadDePalabras(r.getHijoIzquierdo()) + cantidadDePalabras(r.getHijoDerecho()) + 1;
+        }
+
+        return 0;
+}
+    
+    
 
     //1. Escriba un método que retorne la cantidad de hojas del arbol
     //

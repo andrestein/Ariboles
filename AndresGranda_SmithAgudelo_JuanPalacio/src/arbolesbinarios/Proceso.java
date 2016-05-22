@@ -31,5 +31,9 @@ public class Proceso {
                 palabra="";
             }
         }
-    }    
+    }
+    
+    public int cantidadPalabras(){
+        return arbol.cantidadDePalabras();
+    }
 }

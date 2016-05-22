@@ -17,6 +17,9 @@ public class Inicial {
     public static void main(String args[]) {
         System.out.println("ingrese la cadena de texto");
         Scanner sc =new Scanner(System.in);
-        Proceso proceso=new Proceso(sc.nextLine());        
+        Proceso proceso=new Proceso(sc.nextLine());
+        proceso.crearArbol();
+        int numeroPalabras =proceso.cantidadPalabras();
+        System.out.println(numeroPalabras);
     }
 }
