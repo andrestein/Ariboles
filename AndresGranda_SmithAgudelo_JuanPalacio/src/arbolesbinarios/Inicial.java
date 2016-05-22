@@ -70,8 +70,12 @@ public class Inicial {
                         print( proceso.cantidadPalabras() + " palabras" );
                     break;
                     case 'b':
-                        // Punto b usar print() por favor
-                        
+                        words=proceso.palabrasDesiguales();
+                        for(String word : words){
+                            println(word+" ");
+                        }
+                        print( proceso.palabrasDesiguales() + " palabras desiguales" );
+//                        print(proceso.palabrasIguales() + " palablas iguales");
                     break;
                     case 'c':
                         // Punto c usar print() por favor

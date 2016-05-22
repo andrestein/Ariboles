@@ -43,11 +43,7 @@ public class Proceso {
     public int cantidadPalabras(){
         return arbol.cantidadDePalabras();
     }
-    
-    public ArrayList<String> palabrasIguales(){
-        return arbol.desiguales();
-    }
-    
+        
     public List<String> ordenarTexto() {
         List<String> list = new LinkedList<>();
         NodoBinario<String> raiz = arbol.getRaiz();
