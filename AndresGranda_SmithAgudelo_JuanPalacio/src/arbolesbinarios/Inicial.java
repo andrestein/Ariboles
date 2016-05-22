@@ -20,6 +20,7 @@ public class Inicial {
         Proceso proceso=new Proceso(sc.nextLine());
         proceso.crearArbol();
         int numeroPalabras =proceso.cantidadPalabras();
-        System.out.println(numeroPalabras);
+        System.out.println("el numero de palabras es : "+numeroPalabras);        
+        System.out.println(" La palabra mas repetida es : "+proceso.masRepetida());
     }
 }
