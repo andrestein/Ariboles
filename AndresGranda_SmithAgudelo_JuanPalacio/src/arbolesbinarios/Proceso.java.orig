@@ -5,7 +5,6 @@
  */
 package arbolesbinarios;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +25,30 @@ public class Proceso {
         palabrasIguales = new ArrayList<>();
     }
     
+<<<<<<< HEAD
     public void crearArbol(List<String> palabras){
         for(String palabra: palabras) {
             palabra = palabra.trim();
             if ( palabra.matches( "\\w+") ) {
                 System.out.print( palabra + "," );
                 arbol.add( palabra );
+=======
+    public void crearArbol(){
+        String palabra = "";
+        int cont = 0;
+        if(texto.charAt(texto.length()-1) != ' '){
+            texto = texto + " ";
+        }
+        for(int i = 0;i<texto.length();i++){
+            texto.trim();
+            if(texto.charAt(i) != ' '){
+                palabra = palabra+texto.charAt(i);
+            }else{
+                arbol.add(palabra);
+                palabras.add(palabra);
+                palabra="";
+                cont++;
+>>>>>>> b6764a2ecdf315ae631cffb2baf462c39acc63e6
             }
         }
     }

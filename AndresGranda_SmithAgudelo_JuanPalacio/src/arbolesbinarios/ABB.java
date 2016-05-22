@@ -5,6 +5,8 @@
  */
 package arbolesbinarios;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author s212e19
@@ -13,6 +15,7 @@ package arbolesbinarios;
 public class ABB<E extends Comparable<E>> {
 
     private NodoBinario<E> raiz;
+    private ArrayList<String> diferentes;
 
     public ABB() {
         raiz = null;
@@ -82,8 +85,71 @@ public class ABB<E extends Comparable<E>> {
         }
 
         return 0;
-}
+    }
     
+    public int masRepetida() {
+        ArrayList<E> lista = new ArrayList<>();
+        lista = masRepetida(raiz);
+        int contador = 0;
+        NodoBinario<E> r = raiz;
+        while (r != null) {
+            if (lista.contains(r.getItem())) {
+                contador++;
+            }
+            r = r.getHijoDerecho();
+        }
+        r = raiz;
+        while (r != null) {
+            if (lista.contains(r.getItem())) {
+                contador++;
+            }
+           r =  r.getHijoIzquierdo();
+        }
+        return contador;
+    }
+    
+    private ArrayList masRepetida(NodoBinario<E> r) {
+        ArrayList<E> lista = new ArrayList<>();
+            while (r != null) {
+                lista.add((E) r);
+                masRepetida(r.getHijoDerecho());
+                masRepetida(r.getHijoIzquierdo());
+            }
+        return lista;
+    }
+    
+    public ArrayList<E> desiguales(){
+        ArrayList<E> list = new ArrayList<E>();
+        list  = desiguales(raiz);
+        int contador =0;
+        NodoBinario<E> r= raiz;
+        while (r != null) {
+            if (list.contains(r.getItem())) {
+                list.remove(r.getItem());
+            }
+            r = r.getHijoDerecho();
+        }
+        r = raiz;
+        while (r != null) {
+            if (list.contains(r.getItem())) {
+                list.remove(r.getItem());
+            }
+           r =  r.getHijoIzquierdo();
+        }    
+        return list;
+    }
+
+    
+    private ArrayList desiguales(NodoBinario<E> r){
+        ArrayList<E> lista = new ArrayList<>();
+            while (r != null) {
+                lista.add((E) r);
+                desiguales(r.getHijoDerecho());
+                desiguales(r.getHijoIzquierdo());
+            }
+        return lista;
+    }
+
     
 
     //1. Escriba un método que retorne la cantidad de hojas del arbol
