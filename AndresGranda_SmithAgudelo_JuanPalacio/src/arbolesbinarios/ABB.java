@@ -115,7 +115,7 @@ public class ABB<E extends Comparable<E>> {
     private ArrayList masRepetida(NodoBinario<E> r) {
         ArrayList<E> lista = new ArrayList<>();
             while (r != null) {
-                lista.add((E) r);
+                lista.add(r.getItem());
                 masRepetida(r.getHijoDerecho());
                 masRepetida(r.getHijoIzquierdo());
             }
@@ -124,7 +124,7 @@ public class ABB<E extends Comparable<E>> {
     
     public ArrayList<E> desiguales(){
         ArrayList<E> list = new ArrayList<E>();
-        list  = desiguales(raiz);
+        desiguales(raiz,list);
         int contador =0;
         NodoBinario<E> r= raiz;
         while (r != null) {
@@ -144,14 +144,13 @@ public class ABB<E extends Comparable<E>> {
     }
 
     
-    private ArrayList desiguales(NodoBinario<E> r){
-        ArrayList<E> lista = new ArrayList<>();
-            while (r != null) {
-                lista.add((E) r);
-                desiguales(r.getHijoDerecho());
-                desiguales(r.getHijoIzquierdo());
-            }
-        return lista;
+    private void desiguales(NodoBinario<E> r,ArrayList<E> lista){    
+        while (r != null) {
+            lista.add(r.getItem());
+            desiguales(r.getHijoDerecho(),lista);
+            lista.add(r.getItem());
+            desiguales(r.getHijoIzquierdo(),lista);
+        }       
     }
 
     
