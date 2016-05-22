@@ -6,6 +6,7 @@
 package arbolesbinarios;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,7 +31,6 @@ public class Proceso {
         for(String palabra: palabras) {
             palabra = palabra.trim();
             if ( palabra.matches( "\\w+") ) {
-                System.out.print( palabra + "," );
                 arbol.add( palabra );
             }
         }
@@ -46,6 +46,13 @@ public class Proceso {
     
     public ArrayList<String> palabrasIguales(){
         return arbol.desiguales();
+    }
+    
+    public List<String> ordenarTexto() {
+        List<String> list = new LinkedList<>();
+        NodoBinario<String> raiz = arbol.getRaiz();
+        list = raiz.preorder();
+        return list;
     }
     
 }

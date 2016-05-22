@@ -25,16 +25,17 @@ public class Inicial {
     public static void main( String args[] ) {
         Proceso proceso = new Proceso( "Texto" );
         for ( ;; ) {
-            println( "Arboles" );
+            println( "### Arboles" );
             Scanner read = new Scanner( System.in );
 
-            for ( ;; ) {
+            char op = '\0';
+            do {
                 println( "1) Leer archivo\n2) Leer cadena\n" );
                 print( "opcion: > " );
-                String op = read.nextLine();
+                op = read.nextLine().charAt( 0 );
                 List<String> words = null;
-                
-                switch ( op.charAt( 0 ) ) {
+
+                switch ( op ) {
                 case '1':
                     words = readFile();
                     proceso.crearArbol( words );
@@ -44,11 +45,56 @@ public class Inicial {
                     words = readConsole();
                     proceso.crearArbol( words );
                     break;
+                default:
+                    op = '\0';
                 }
-            }
+            } while ( op == '\0' );
+            println( "\nArbol creado exitosamente." );
+            do {
+                println( "\n\n### Operaciones" );
+                println( "a) Muestra cuantas palabras lo componen.\n"
+                        + "b) Muestra las palabras diferentes que lo componen\n"
+                        + "   y las veces que se repite cada palabra.\n"
+                        + "c) Muestra el elemento con menor campo-clave\n"
+                        + "d) Muestra la palabra que mas se repite\n"
+                        + "e) Muestra las palabras del texto en orden alfabetico\n"
+                        + "s) Salir.\n"
+                );
+
+                print( "opcion: > " );
+                op = read.nextLine().charAt( 0 );
+                List<String> words = null;
+                
+                switch (op) {
+                    case 'a':
+                        print( proceso.cantidadPalabras() + " palabras" );
+                    break;
+                    case 'b':
+                        // Punto b usar print() por favor
+                        
+                    break;
+                    case 'c':
+                        // Punto c usar print() por favor
+                    break;
+                    case 'd':
+                        // Punto d usar print() por favor
+                    break;
+                    case 'e':
+                        words = proceso.ordenarTexto();
+                        for ( String word : words ) {
+                            print( word + " " );
+                        }
+                    break;
+                    case 's':
+                        println( "Saliendo..." );
+                        return;
+                    default: 
+                        op = '\0';
+                }
+                
+            } while ( op != '\0' );
         }
     }
-
 
     public static List<String> readFile() {
         JFileChooser chooser = new JFileChooser();
@@ -83,7 +129,7 @@ public class Inicial {
         List<String> words = new LinkedList<>();
         String line = null;
         line = read.nextLine();
-        words.addAll( Arrays.asList( line.split( "\\b+") ) );
+        words.addAll( Arrays.asList( line.split( "\\b+" ) ) );
         return words;
     }
 
@@ -94,4 +140,5 @@ public class Inicial {
     public static <T extends Object> void println( T str ) {
         System.out.println( str );
     }
+
 }

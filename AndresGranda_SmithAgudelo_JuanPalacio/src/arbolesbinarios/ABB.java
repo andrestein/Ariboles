@@ -20,6 +20,10 @@ public class ABB<E extends Comparable<E>> {
     public ABB() {
         raiz = null;
     }
+    
+    public NodoBinario<E> getRaiz() {
+        return raiz;
+    }
 
     public void add(E target) {
         if (raiz != null) {

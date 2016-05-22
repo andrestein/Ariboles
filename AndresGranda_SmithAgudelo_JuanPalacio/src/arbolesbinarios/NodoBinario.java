@@ -6,6 +6,9 @@
 
 package arbolesbinarios;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author s212e19
@@ -76,20 +79,19 @@ public class NodoBinario<E> {
         return resultado;
     }
 
-    public String preorder() {
-        return preorder(this);
+    public List<E> preorder() {
+        List<E> list = new LinkedList<>();
+        preorder(this, list);
+        return list;
     }
 
-    protected String preorder(NodoBinario<E> nodo) {
-        String resultado = "";
-
+    protected void preorder(NodoBinario<E> nodo, List<E> list) {
         if (nodo != null) {
-            resultado += nodo.item + " ";
-            resultado += preorder(nodo.hijoIzquierdo);
-            resultado += preorder(nodo.hijoDerecho);
+            list.add( nodo.getItem() );
+            preorder( nodo.hijoIzquierdo, list);
+            list.add( nodo.getItem() );
+            preorder(nodo.hijoDerecho, list);
         }
-
-        return resultado;
     }
 
     public boolean esHoja() {
