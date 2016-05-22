@@ -36,15 +36,15 @@ public class Proceso {
         }
     }
     
+    public ArrayList<String> palabrasDesiguales(){
+        return arbol.desiguales();
+    }
+    
     public int cantidadPalabras(){
         return arbol.cantidadDePalabras();
     }
     
-    public int masRepetida(){
-        return arbol.masRepetida();
-    }
-    
-    public ArrayList<String> desigualdad(){
+    public ArrayList<String> palabrasIguales(){
         return arbol.desiguales();
     }
     
