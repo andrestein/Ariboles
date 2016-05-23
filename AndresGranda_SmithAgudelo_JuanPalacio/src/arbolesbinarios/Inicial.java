@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +23,7 @@ public class Inicial {
 
     public static void main( String args[] ) {
         Proceso proceso = new Proceso( "Texto" );
-        
+
         for ( ;; ) {
             println( "### Arboles" );
             Scanner read = new Scanner( System.in );
@@ -34,21 +33,24 @@ public class Inicial {
                 println( "1) Leer archivo\n2) Leer cadena\n" );
                 print( "opcion: > " );
                 op = read.nextLine().charAt( 0 );
-                List<String> words = null;
+                List<Palabra> words = null;
 
                 switch ( op ) {
                 case '1':
                     words = readFile();
-                    proceso.crearArbol( words );
                     break;
                 case '2':
                     print( "> " );
                     words = readConsole();
-                    proceso.crearArbol( words );
                     break;
                 default:
                     op = '\0';
                 }
+
+                if ( words != null && words.size() > 0 )
+                    proceso.crearArbol( words );
+                else
+                    op = '\0';
             } while ( op == '\0' );
             println( "\nArbol creado exitosamente." );
             do {
@@ -64,37 +66,36 @@ public class Inicial {
 
                 print( "opcion: > " );
                 op = read.nextLine().charAt( 0 );
-                List<String> words = null;
-                
-                switch (op) {
-                    case 'a':
-                        print( proceso.cantidadPalabras() + " palabras" );
+                List<Palabra> words = null;
+
+                switch ( op ) {
+                case 'a':
+                    print( proceso.cantidadPalabras() + " palabras" );
                     break;
-                    case 'b':
-                        words=proceso.palabrasDesiguales();
-                        for(String word : words){
-                            println(word+" ");
-                        }
-                        print( proceso.palabrasDesiguales() + " palabras desiguales" );
-//                        print(proceso.palabrasIguales() + " palablas iguales");
+                case 'b':
+                    words = proceso.palabrasDesiguales();
+                    for ( Palabra w : words ) {
+                        print( w + " " );
+                    }
+
                     break;
-                    case 'c':
-                        // Punto c usar print() por favor
+                case 'c':
+                    print( proceso.palabraMenorCampoClave() );
                     break;
-                    case 'd':
-                        // Punto d usar print() por favor
+                case 'd':
+                    print( proceso.palabraRepetida() );
                     break;
-                    case 'e':
-                        words = proceso.ordenarTexto();
-                        for ( String word : words ) {
-                            print( word + " " );
-                        }
+                case 'e':
+                    words = proceso.ordenarTexto();
+                    for ( Palabra w : words ) {
+                        print( w + " " );
+                    }
                     break;
-                    case 's':
-                        println( "Saliendo..." );
-                        return;
-                    default: 
-                        op = '\0';
+                case 's':
+                    println( "Saliendo..." );
+                    return;
+                default:
+                    op = '\0';
                 }
                 println( "\nEnter para continuar..." );
                 read.nextLine();
@@ -102,14 +103,14 @@ public class Inicial {
         }
     }
 
-    public static List<String> readFile() {
+    public static List<Palabra> readFile() {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter( "Text plain", "txt" );
         chooser.setFileFilter( filter );
         chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
         int status = chooser.showOpenDialog( null );
 
-        List<String> words = new LinkedList<>();
+        List<Palabra> words = new LinkedList<>();
         File file = null;
 
         if ( status == JFileChooser.APPROVE_OPTION )
@@ -122,7 +123,9 @@ public class Inicial {
                 BufferedReader buff = new BufferedReader( new FileReader( file ) );
                 for ( String w = buff.readLine(); w != null; w = buff.readLine() ) {
                     String[] ws = w.split( "\\b+" );
-                    words.addAll( Arrays.asList( ws ) );
+                    for ( String word : ws ) {
+                        words.add( new Palabra( word ) );
+                    }
                 }
             } catch ( IOException e ) {
                 println( "File I/O rrror" );
@@ -130,12 +133,14 @@ public class Inicial {
         return words;
     }
 
-    public static List<String> readConsole() {
+    public static List<Palabra> readConsole() {
         Scanner read = new Scanner( System.in );
-        List<String> words = new LinkedList<>();
+        List<Palabra> words = new LinkedList<>();
         String line = null;
         line = read.nextLine();
-        words.addAll( Arrays.asList( line.split( "\\b+" ) ) );
+        for ( String word : line.split( "\\b+" ) ) {
+            words.add( new Palabra( word ) );
+        }
         return words;
     }
 

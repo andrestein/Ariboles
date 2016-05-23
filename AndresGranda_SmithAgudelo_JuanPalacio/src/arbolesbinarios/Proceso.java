@@ -6,7 +6,6 @@
 package arbolesbinarios;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,41 +13,70 @@ import java.util.List;
  * @author LENOVO
  */
 public class Proceso {
-    
+
     private String texto;
     private ABB arbol;
-    private ArrayList<String> palabras;
-    private ArrayList<String> palabrasIguales;
-    
-    public Proceso(String texto){
+    //  private ArrayList<String> palabras;
+    // private ArrayList<String> palabrasIguales;
+
+    public Proceso( String texto ) {
         this.texto = texto;
         arbol = new ABB();
-        palabras = new ArrayList<>();
-        palabrasIguales = new ArrayList<>();
     }
-    
-    public void crearArbol(List<String> palabras){
-        for(String palabra: palabras) {
-            palabra = palabra.trim();
-            if ( palabra.matches( "\\w+") ) {
+
+    public void crearArbol( List<Palabra> palabras ) {
+        for ( Palabra palabra : palabras ) {
+            if ( palabra.cadena.matches( "\\w+" ) )
                 arbol.add( palabra );
-            }
         }
     }
-    
-    public ArrayList<String> palabrasDesiguales(){
+
+    public ArrayList<Palabra> palabrasDesiguales() {
         return arbol.desiguales();
     }
-    
-    public int cantidadPalabras(){
+
+    public int cantidadPalabras() {
         return arbol.cantidadDePalabras();
     }
-        
-    public List<String> ordenarTexto() {
-        List<String> list = new LinkedList<>();
-        NodoBinario<String> raiz = arbol.getRaiz();
-        list = raiz.inordem();
+
+    public List<Palabra> ordenarTexto() {
+        NodoBinario<Palabra> raiz = arbol.getRaiz();
+        List<Palabra> list = raiz.inordem();
         return list;
     }
-    
+
+    private int cantidadDePalabras( NodoBinario<Palabra> arbol ) {
+        if ( arbol != null )
+            return cantidadDePalabras( arbol.getHijoIzquierdo() ) + cantidadDePalabras( arbol.getHijoDerecho() ) + 1;
+        return 0;
+    }
+
+    public int cantidadDePalabras() {
+        return cantidadDePalabras( arbol.getRaiz() );
+    }
+
+    private Palabra palabraRepetida( NodoBinario<Palabra> nodo, Palabra palabra ) {
+        if ( nodo != null ) {
+            if ( nodo.getItem().getRepeticiones() > palabra.getRepeticiones() )
+                palabra = nodo.getItem();
+            palabra = palabraRepetida( nodo.getHijoIzquierdo(), palabra );
+            palabra = palabraRepetida( nodo.getHijoDerecho(), palabra );
+        }
+        return palabra;
+    }
+
+    public Palabra palabraRepetida() {
+        return palabraRepetida( arbol.getRaiz(), (Palabra) arbol.getRaiz().getItem() );
+    }
+
+    private Palabra palabraMenorCampoClave( NodoBinario<Palabra> arbol ) {
+        if ( arbol.getHijoIzquierdo() != null )
+            return palabraMenorCampoClave( arbol.getHijoIzquierdo() );
+        return arbol.getItem();
+    }
+
+    public Palabra palabraMenorCampoClave() {
+        return palabraMenorCampoClave( arbol.getRaiz() );
+    }
+
 }

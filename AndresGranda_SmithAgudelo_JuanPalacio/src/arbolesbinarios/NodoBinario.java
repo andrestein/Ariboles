@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package arbolesbinarios;
 
 import java.util.LinkedList;
@@ -13,7 +12,6 @@ import java.util.List;
  *
  * @author s212e19
  */
-
 /**
  *
  * @author Oscar Arenas
@@ -25,13 +23,13 @@ public class NodoBinario<E> {
     private E item;
     private NodoBinario<E> hijoDerecho;
 
-    public NodoBinario(E item) {
+    public NodoBinario( E item ) {
         this.item = item;
         this.hijoIzquierdo = null;
         this.hijoDerecho = null;
     }
 
-    public NodoBinario(NodoBinario<E> hijoIzquierdo, E item, NodoBinario<E> hijoDerecho) {
+    public NodoBinario( NodoBinario<E> hijoIzquierdo, E item, NodoBinario<E> hijoDerecho ) {
         this.hijoIzquierdo = hijoIzquierdo;
         this.item = item;
         this.hijoDerecho = hijoDerecho;
@@ -41,7 +39,7 @@ public class NodoBinario<E> {
         return hijoIzquierdo;
     }
 
-    public void setHijoIzquierdo(NodoBinario<E> hijoIzquierdo) {
+    public void setHijoIzquierdo( NodoBinario<E> hijoIzquierdo ) {
         this.hijoIzquierdo = hijoIzquierdo;
     }
 
@@ -49,7 +47,7 @@ public class NodoBinario<E> {
         return item;
     }
 
-    public void setItem(E item) {
+    public void setItem( E item ) {
         this.item = item;
     }
 
@@ -57,11 +55,11 @@ public class NodoBinario<E> {
         return hijoDerecho;
     }
 
-    public void setHijoDerecho(NodoBinario<E> hijoDerecho) {
+    public void setHijoDerecho( NodoBinario<E> hijoDerecho ) {
         this.hijoDerecho = hijoDerecho;
     }
 
-    public void setHijos(NodoBinario<E> hijoIzquierdo, NodoBinario<E> hijoDerecho) {
+    public void setHijos( NodoBinario<E> hijoIzquierdo, NodoBinario<E> hijoDerecho ) {
         this.hijoIzquierdo = hijoIzquierdo;
         this.hijoDerecho = hijoDerecho;
     }
@@ -70,12 +68,10 @@ public class NodoBinario<E> {
         String resultado = "";
         resultado += item;
 
-        if (hijoIzquierdo != null) {
+        if ( hijoIzquierdo != null )
             resultado += hijoIzquierdo.toStringPreorder();
-        }
-        if (hijoDerecho != null) {
+        if ( hijoDerecho != null )
             resultado += hijoDerecho.toStringPreorder();
-        }
         return resultado;
     }
 
@@ -84,30 +80,31 @@ public class NodoBinario<E> {
         inordem( this, list );
         return list;
     }
-    
-    protected void inordem(NodoBinario<E> node, List<E> list) {
-        if ( node != null) {
-            inordem(node.hijoIzquierdo, list);
-            list.add( node.getItem());
-            inordem(node.hijoDerecho, list);
-        } 
+
+    protected void inordem( NodoBinario<E> node, List<E> list ) {
+        if ( node != null ) {
+            inordem( node.hijoIzquierdo, list );
+            list.add( node.getItem() );
+            inordem( node.hijoDerecho, list );
+        }
     }
-    
+
     public List<E> preorder() {
         List<E> list = new LinkedList<>();
-        preorder(this, list);
+        preorder( this, list );
         return list;
     }
 
-    protected void preorder(NodoBinario<E> nodo, List<E> list) {
-        if (nodo != null) {
+    protected void preorder( NodoBinario<E> nodo, List<E> list ) {
+        if ( nodo != null ) {
             list.add( nodo.getItem() );
-            preorder( nodo.hijoIzquierdo, list);
-            preorder(nodo.hijoDerecho, list);
+            preorder( nodo.hijoIzquierdo, list );
+            preorder( nodo.hijoDerecho, list );
         }
     }
 
     public boolean esHoja() {
         return hijoIzquierdo == null && hijoDerecho == null;
     }
+
 }
